@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/caleran.min.css" />
+    </head>
+    <body>
+        <input type="text" id="caleran-ex-1" />
+        <div id="timepicker"></div>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        <script type="text/javascript" src="js/caleran.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                const timeSlots = [
+                    { label: "8:00 - 9:00", value: "8:00" },
+                    { label: "9:00 - 10:00", value: "9:00" },
+                    { label: "10:00 - 11:00", value: "10:00" },
+                ];
+                
+                // Initialize the datepicker
+                $("#caleran-ex-1").caleran({
+                    showFooter: false,
+                    ondraw: function () {
+                        // Get the datepicker container element
+                        const container = document.querySelector(
+                            ".caleran-days-container"
+                        );
+
+                        // Create the timepicker HTML
+                        const timepickerHTML = generateTimepickerHTML();
+
+                        // Add the timepicker HTML to the datepicker container
+                        container.insertAdjacentHTML(
+                            "beforeend",
+                            timepickerHTML
+                        );
+                    },
+                });
+
+                
+
+                // Function to generate the timepicker HTML
+                function generateTimepickerHTML() {
+                    let html = '<select id="timepicker-select">';
+
+                    timeSlots.forEach((slot) => {
+                        html += `<option value="${slot.value}">${slot.label}</option>`;
+                    });
+
+                    html += "</select>";
+
+                    return html;
+                }
+            });
+        </script>
+    </body>
+</html>
